@@ -13,3 +13,17 @@ WAIT_LOOP:
     DJNZ R2, WAIT_LOOP     ;Decrement the R2 register and jump to WAIT_LOOP if it not equals to zero
     DJNZ R1, DELAY         ;Decrement the R1 register and jump to DELAY if it not equals to zero 
 END                        ;end the program
+
+;Write  another  version  which  uses  a  count  up  loop,  using  CJNE  (compare  and  jump  if  not  equal).
+;Inboth cases, you will have to use a loop within a loop to get the delay required in order to manage a 8 bitcount
+
+ORG 00H                   ;origin address of the program
+DELAY_LOOP:       
+    MOV A, 71H            ;moving the content of 71H address into accumulator register
+    MOV R1, A             ;moving the content of accumulator register into R1 registor
+DELAY:
+MOV R2,#00H               ;clearing the R2 register
+L1:INC R2                 ;incrementing the R2 register
+CJNE R2,#0FAH,L1          ;compare the content of R2 register with 0FAH(Decimal value:250) and jump if it not equals
+RET                       ;return the program
+END                       ;end the program
